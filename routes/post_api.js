@@ -1,6 +1,14 @@
 const express=require('express');
+const jwt=require('jsonwebtoken');
 const router=express.Router();
+const authVerify=require('./verifyToken');
 const Post=require('../model/Post');
+
+router.get('/',authVerify,(req,res)=>
+{
+    const id=req.user; //to grab the _id from the auth_token available in the req. header (which will be returned by the authVerify)
+    res.json({"msg":"ALERT !!! PRIVATE DATA!"})
+})
 
 router.get('/getData',(req,res)=>
 {
